@@ -4,7 +4,9 @@ TSQL Stored Procedure which gets a ClientID and a Credit Card No by parameters, 
  --------------------------
 
 ## How to Decrypt the Credit Card number?
-First of all, we need to have some data in the table, so we just go to execute the Stored Procedure, passing the value **0019752834** as **ID_CLIENT** and **1111-2222-3333-4444** as **Plain_Credit_Card**.
+First of all, we need to have some data in the table, so we just go to execute the Stored Procedure, passing the value **0019752834** as **ID_CLIENT** and **1111-2222-3333-4444** as **Plain_CC**.
+
+Now, execute a ```SELECT``` with the Decrypt function:
 
 ```
 SELECT [ID_CC]
@@ -17,7 +19,7 @@ SELECT [ID_CC]
 FROM [dbo].[CC_INFORMATION]
 ```
 
-And that's what we'll get:
+And we'll get something like this:
 
 |ID_CC|ID_CLIENT|CREDIT_CARD|SALT|Plain_CreditCard|CREATION_DATE|UPDATED_DATE|
 |-----|---------|-----------|----|----------------|-------------|------------|
