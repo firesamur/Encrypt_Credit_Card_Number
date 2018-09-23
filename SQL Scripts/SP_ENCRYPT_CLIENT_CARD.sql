@@ -24,9 +24,9 @@ BEGIN
     BEGIN
         -- If client already has a CC linked, UPDATE.
         -- Note: If we want to add multiple Credit Cards associated to a same client, we will only let the INSERT statement on code below.
-		IF EXISTS(SELECT TOP 1 * FROM [DEV_PRUEBAS].[dbo].[CC_INFORMATION] WHERE [ID_CLIENT] = @ClientID)
+		IF EXISTS(SELECT TOP 1 * FROM [BANK_USERS_DATA].[dbo].[CC_INFORMATION] WHERE [ID_CLIENT] = @ClientID)
         BEGIN
-            UPDATE [DEV_PRUEBAS].[dbo].[CC_INFORMATION]
+            UPDATE [BANK_USERS_DATA].[dbo].[CC_INFORMATION]
             SET [CREDIT_CARD] = @enc_CreditCard
                 , [SALT] = @saltKey
 				, [UPDATED_DATE] = GETDATE()
@@ -37,7 +37,7 @@ BEGIN
         -- If does not exist, INSERT.
         ELSE
         BEGIN
-            INSERT INTO [DEV_PRUEBAS].[dbo].[CC_INFORMATION] ([ID_CLIENT], [CREDIT_CARD], [SALT], [CREATION_DATE], [UPDATED_DATE]) 
+            INSERT INTO [BANK_USERS_DATA].[dbo].[CC_INFORMATION] ([ID_CLIENT], [CREDIT_CARD], [SALT], [CREATION_DATE], [UPDATED_DATE]) 
             VALUES (@ClientID, @enc_CreditCard, @saltKey, GETDATE(), GETDATE())
 
             return 1
